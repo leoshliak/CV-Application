@@ -41,7 +41,7 @@ function App() {
       endDate: 'present',
       location: 'London, UK',
       description: 'As a Software Engineer at TechNova Solutions, the individual will be responsible for designing, developing, and maintaining software applications that cater to a variety of industries, from finance to healthcare. They will work collaboratively with cross-functional teams to understand user needs and translate them into high-quality software solutions. The role involves writing clean, efficient code, debugging, and performing unit testing to ensure functionality. Additionally, the engineer will be involved in the integration of third-party APIs, ensuring the scalability and security of the applications. With a strong foundation in Computer Science, the individual will also contribute to the continuous improvement of the software development lifecycle and mentor junior team members.',
-    }]);
+    }])
   }
   
   const [visibleDivs, setVisibleDivs] = useState({
