@@ -92,7 +92,7 @@ aside {
 }
 
 .personal-details,
-.education {
+.education, .experience {
     width: 90%;
     background-color: #fff;
     padding: 15px;
@@ -101,7 +101,7 @@ aside {
 }
 
 .personal-details h2,
-.education h2 {
+.education h2, .experience h2 {
     font-size: 1.7rem;
     letter-spacing: 0.4px;
 }
@@ -131,6 +131,10 @@ aside {
     letter-spacing: 0.2px;
 }
 
+.input-group textarea {
+  resize: vertical;
+}
+
 .input-group input:focus, .input-group input:active {
     background-color: #f3f4f6;
     outline: none;
@@ -145,7 +149,8 @@ aside {
 }
 
 .paper-sheet {
-    width: 70%;
+    min-width: 70%;
+    max-width: 850px;
     min-height: 900px;
     box-shadow: 0px 0px 10px 0px #0000002e;
 }
@@ -162,7 +167,7 @@ aside {
 
 .personal-data {
     display: flex;
-    gap: 25px;
+    gap: 10px;
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
@@ -175,11 +180,12 @@ aside {
 
 .personal-data p {
     letter-spacing: 0.3px;
-    
+    min-width: 28%;
+    text-align: center;
 }
 
 .title-con,
-.title-ed {
+.title-ed, .title-exp {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -187,7 +193,7 @@ aside {
 }
 
 .title-con span,
-.title-ed span {
+.title-ed span, .title-exp span {
     font-size: 22px;
     cursor: pointer;
     transition: all 0.2s;
@@ -199,7 +205,8 @@ aside {
 }
 
 .form-con,
-.ed-form, .edit-form {
+.ed-form, .edit-form, 
+.exp-form {
    transition: all 0.3s;
    margin-top: 10px;
    overflow: hidden;
@@ -216,7 +223,8 @@ aside {
     padding-bottom: 25px;
 }
 
-.education-con {
+.education-con,
+.experience-con {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -303,14 +311,18 @@ aside {
 .rest {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    gap: 40px;
     padding:  25px 40px;
 }
 
-  .education-data {
+  .education-data,
+  .experience-data {
     width: 100%;
   }
 
-  .education-data h4 {
+  .education-data h4,
+  .experience-data h4 {
     text-align: center;
     font-size: 1.4rem;
     letter-spacing: 0.4px;
@@ -319,7 +331,7 @@ aside {
     padding-bottom: 7px;
   }
 
-  .degrees {
+  .degrees, .experiences {
     width: 100%;
     padding-top: 15px;
     display: flex;
@@ -327,7 +339,7 @@ aside {
     gap: 15px;
   }
   
-  .ed-card {
+  .card {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -337,7 +349,7 @@ aside {
     height: auto;
   }
 
-  .ed-card p {
+  .card p {
     color: #092f46;
     font-size: 1rem;
     font-weight: 600;
@@ -367,7 +379,8 @@ aside {
     color: #e70e0e;
   }
 
-  .educations-container {
+  .educations-container,
+  .experience-container {
     padding-top: 15px;
     width: 100%;
     display: flex;
@@ -375,7 +388,8 @@ aside {
     gap: 20px;
   }
 
-  .ed-title {
+  .ed-title,
+  .exp-title {
     font-size: 1.3rem;
     font-weight: 600;
   }
@@ -390,7 +404,8 @@ aside {
     line-break: anywhere;
   }
 
-  .ed-piece div {
+  .ed-piece div,
+  .no-des-data div {
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -398,6 +413,40 @@ aside {
     height: auto;
   }
 
+  .ed-piece div:nth-child(1),
+  .no-des-data div:nth-child(1) {
+    align-items: flex-start;
+  }
+
+  .ed-piece div:nth-child(2),
+  .no-des-data div:nth-child(2) {
+    align-items: flex-end;
+  }
+
   .degree {
     font-size: 0.97rem;
   }
+
+  .optional {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+
+  .des {
+    line-height: 27px;
+  }
+
+  .no-des-data {
+    display: flex; 
+    justify-content: space-between;
+    margin-bottom: 10px;
+    max-width: 750px;
+  }
+
+  .exp-piece p {
+    letter-spacing: 0.2px;
+    line-break: anywhere;
+    max-width: 750px;
+}
+
