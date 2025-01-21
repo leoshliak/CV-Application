@@ -17,6 +17,7 @@ function App() {
     setPhone('')
     setAdress('')
     setEdarr([])
+    setExparr([])
   }
 
   function loadExample() {
@@ -33,6 +34,14 @@ function App() {
         location: 'Liverpool, UK',
       }
     ])
+    setExparr([{
+      compName: 'TechNova Solutions',
+      position: 'Software Engineer',
+      startDate: '01/02/2022',
+      endDate: 'present',
+      location: 'London, UK',
+      description: 'As a Software Engineer at TechNova Solutions, the individual will be responsible for designing, developing, and maintaining software applications that cater to a variety of industries, from finance to healthcare. They will work collaboratively with cross-functional teams to understand user needs and translate them into high-quality software solutions. The role involves writing clean, efficient code, debugging, and performing unit testing to ensure functionality. Additionally, the engineer will be involved in the integration of third-party APIs, ensuring the scalability and security of the applications. With a strong foundation in Computer Science, the individual will also contribute to the continuous improvement of the software development lifecycle and mentor junior team members.',
+    }]);
   }
   
   const [visibleDivs, setVisibleDivs] = useState({
@@ -42,6 +51,9 @@ function App() {
     edForm: false,
     edButton: true,
     editForm: false,
+    expForm: false,
+    expButton: true,
+    expEditForm: false,
   });
 
   const toggleVisibility = (divKey, event) => {
@@ -63,9 +75,18 @@ function App() {
       location: 'Liverpool, UK',
     }
   ]);
+
+  const [exparr, setExparr] = useState([{
+    compName: 'TechNova Solutions',
+    position: 'Software Engineer',
+    startDate: '01/02/2022',
+    endDate: 'present',
+    location: 'London, UK',
+    description: 'As a Software Engineer at TechNova Solutions, the individual will be responsible for designing, developing, and maintaining software applications that cater to a variety of industries, from finance to healthcare. They will work collaboratively with cross-functional teams to understand user needs and translate them into high-quality software solutions. The role involves writing clean, efficient code, debugging, and performing unit testing to ensure functionality. Additionally, the engineer will be involved in the integration of third-party APIs, ensuring the scalability and security of the applications. With a strong foundation in Computer Science, the individual will also contribute to the continuous improvement of the software development lifecycle and mentor junior team members.',
+  }]);
   
- // const [isEditing, setIsEditing] = useState(false);
    const [editIndex, setEditIndex] = useState(null);
+   const [editIndex2, setEditIndex2] = useState(null);
   
     const [formData, setFormData] = useState({
       EI: '',
@@ -75,9 +96,26 @@ function App() {
       location: '',
     });
 
+    const [formData2, setFormData2] = useState({
+      compName: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      location: '',
+      description: '',
+    });
+
     function handleInputChange(e) {
       const { name, value } = e.target;
       setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    };
+
+    function handleInputChange2(e) {
+      const { name, value } = e.target;
+      setFormData2((prev) => ({
         ...prev,
         [name]: value,
       }));
@@ -110,30 +148,32 @@ function App() {
       }
     }
 
-    /*if (isEditing) {
-      // Update the existing card in the array
-      setEdarr((prevEd) =>
-        prevEd.map((education, index) =>
-          index === editIndex ? { ...formData } : education)
-      );
-      setIsEditing(false);
-      setEditIndex(null);
+    function handleSubmit2(e) {
+      e.preventDefault(); 
+   if(formData2.startDate == '') {
+    
+   } else {
+    const [year, month, day] = formData2.startDate.split('-');
+      formData2.startDate = `${day}/${month}/${year}`;
+   }
+      
+    
+    if(formData2.endDate == '') {
+       formData2.endDate = 'present';
     } else {
-      // Add a new card to the array
-      setEdarr((prevEd) => [...prevEd, formData]);
+      const [year2, month2, day2] = formData2.endDate.split('-');
+      formData2.endDate = `${day2}/${month2}/${year2}`
     }
+    
+    
 
-    // Clear the form inputs
-    setFormData({ title: '', description: '' });
-  
-
-  // Handle editing a card
-  const handleEdit = (index) => {
-    const cardToEdit = cards[index];
-    setFormData(cardToEdit);
-    setIsEditing(true);
-    setEditIndex(index);
-  };*/
+      if (formData2.compName && formData2.position && formData2.startDate) {
+        setExparr((prevEd) => [...prevEd, formData2]);
+        setFormData2({ compName: '', position: '', startDate: '', endDate: '', location: '', description: '' });
+      } else {
+        alert('Please fill out all fields.');
+      }
+    }
 
    function handleConfirm(index, e) {
     e.preventDefault();
@@ -162,9 +202,35 @@ function App() {
 
    }
 
-  // Handle deleting a card
-  function handleDelete(index) {
-    setEdarr((prevEd) => prevEd.filter((_, i) => i !== index));
+   function handleConfirm2(index, e) {
+    e.preventDefault();
+
+    if(formData2.startDate == '') {
+    
+    } else {
+     const [year, month, day] = formData2.startDate.split('-');
+       formData2.startDate = `${day}/${month}/${year}`;
+    }
+    
+    if(formData2.endDate == '') {
+       formData2.endDate = 'present';
+    } else {
+      const [year2, month2, day2] = formData2.endDate.split('-');
+      formData2.endDate = `${day2}/${month2}/${year2}`
+    }
+
+    if (formData2.compName && formData2.position && formData2.startDate) { 
+      exparr[Number(index)] = formData2;
+      setExparr([...exparr]);
+      setFormData2({ compName: '', position: '', startDate: '', endDate: '', location: '', description});
+    } else {
+      alert('Please fill out all fields.');
+    }
+
+   }
+
+  function handleDelete(index, targetSet) {
+    targetSet((prevEd) => prevEd.filter((_, i) => i !== index));
   };
 
    
@@ -207,7 +273,7 @@ function App() {
       <div style={{ display: visibleDivs.div2 ? 'flex' : 'none' }} className="education-con">
       <div className="degrees" style={{display: visibleDivs.edButton ? 'flex' : 'none'}}>
           {edarr.map((label, index) => (
-            <div className='ed-card' key={index}>
+            <div className='card' key={index}>
               <p>{label.EI}</p>
 
               <div className="label-buttons">
@@ -234,20 +300,9 @@ function App() {
                     location: edarr[e.target.id].location,
                    })
 
-                           /*
-                   const [year, month, day] = formData.startDate.split('/');
-                formData.startDate = `${year}/${month}/${day}`;
-    
-             if(formData.endDate == 'present') {
-            formData.endDate = '';
-           } else {
-             const [year2, month2, day2] = formData.endDate.split('/');
-             formData.endDate = `${year2}/${month2}/${day2}`
-           } */
-
                    setEditIndex(e.target.id)
                 }}></i>
-                <i className="fa-solid fa-trash-can" onClick={() => handleDelete(index)}></i>
+                <i className="fa-solid fa-trash-can" onClick={() => handleDelete(index, setEdarr)}></i>
               </div>
             </div>
           ))}
@@ -281,7 +336,7 @@ function App() {
         </div>
 
         <div className="input-group">
-           <label htmlFor="EI-location"><span className="label-text">Lacation</span></label>
+           <label htmlFor="EI-location"><span className="label-text">Lacation</span>  <span className='optional'>(optional)</span></label>
            <input type="text" id='EI-location' name='location' value={formData.location} onChange={handleInputChange} maxLength={44} placeholder='City, Country' />
         </div>
 
@@ -348,6 +403,153 @@ function App() {
         }}>Education +</button>
       </div>
       </section>
+
+      <section className='experience'>
+      <div className='title-exp'><h2>Experience</h2>  <span className='turn' onClick={() => toggleVisibility('div3', event)}>▲</span></div>
+      <div style={{ display: visibleDivs.div3 ? 'flex' : 'none' }} className="education-con">
+      <div className="experiences" style={{display: visibleDivs.expButton ? 'flex' : 'none'}}>
+      {exparr.map((label, index) => (
+         <div className="card" key={index}>
+          <p>{label.compName}</p>
+          <div className="label-buttons">
+                <i className="fa-solid fa-pen-to-square" id={index} onClick={(e) => {
+                   toggleVisibility('expEditForm', event);
+                   toggleVisibility('expButton', event);
+
+                   const [day, month, year] = exparr[e.target.id].startDate.split('/');
+
+                   let editEndDate;
+                    
+                   if(exparr[e.target.id].endDate === 'present') {
+                     editEndDate = '';
+                   } else {
+                    const [day2, month2, year2] = exparr[e.target.id].endDate.split('/');
+                     editEndDate = `${year2}-${month2}-${day2}`;
+                   }
+
+                   setFormData2({
+                    compName: exparr[e.target.id].compName,
+                    position: exparr[e.target.id].position,
+                    startDate: `${year}-${month}-${day}`,
+                    endDate: editEndDate,
+                    location: exparr[e.target.id].location,
+                    description: exparr[e.target.id].description
+                   })
+
+                   setEditIndex2(e.target.id)
+                }}></i>
+                <i className="fa-solid fa-trash-can" onClick={() => handleDelete(index, setExparr)}></i>
+              </div>
+         </div>
+        ))}
+      </div>
+      <form className="exp-form" style={{ display: visibleDivs.expForm ? 'block' : 'none' }} onSubmit={(e) =>{
+        e.preventDefault()
+        handleSubmit2(e)
+        toggleVisibility('expForm', event);
+        toggleVisibility('expButton', event);
+        }}>
+        <div className="input-group">
+           <label htmlFor="company"><span className="label-text">Company Name</span></label>
+           <input type="text" id='company' name='compName' value={formData2.compName} onChange={handleInputChange2} maxLength={44} placeholder='Enter Company Name' />
+        </div>
+
+        <div className="input-group">
+           <label htmlFor="position"><span className="label-text">Position</span></label>
+           <input type="text" id='position' name='position' value={formData2.position} onChange={handleInputChange2} maxLength={44} placeholder='Enter Position Title' />
+        </div>
+
+        <div className="ed-dates">
+        <div className="input-group">
+           <label htmlFor="start"><span className="label-text">Start Date</span></label>
+           <input type="date" id='start' name='startDate' value={formData2.startDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
+        </div>
+
+        <div className="input-group">
+           <label htmlFor="end"><span className="label-text">End Date</span></label>
+           <input type="date" id='end' name='endDate' value={formData2.endDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
+        </div>
+        </div>
+
+        <div className="input-group">
+           <label htmlFor="location"><span className="label-text">Lacation</span> <span className='optional'>(optional)</span></label>
+           <input type="text" id='location' name='location' value={formData2.location} onChange={handleInputChange2} maxLength={44} placeholder='City, Country' />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="Description"><span className='label-text'>Description</span>  <span className='optional'>(optional)</span></label>
+          <textarea id="description" name='description' value={formData2.description} placeholder="Enter Description" onChange={handleInputChange2}></textarea> 
+        </div>
+
+        <div className="ed-buttons">
+          
+          <button className='cansel' type='' onClick={(e) => {
+            e.preventDefault();
+            toggleVisibility('expForm', event);
+            toggleVisibility('expButton', event);
+            setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
+            }}>Cansel</button>
+            <button  className='save'>Save</button>
+        </div>
+      </form>
+
+      <form className="edit-form" style={{ display: visibleDivs.expEditForm ? 'block' : 'none' }} onSubmit={(e) => {
+        e.preventDefault()
+        handleConfirm2(editIndex2, e); 
+        toggleVisibility('expEditForm', event);
+        toggleVisibility('expButton', event);
+        }}>
+        <div className="input-group">
+           <label htmlFor="company"><span className="label-text">Company Name</span></label>
+           <input type="text" id='company' name='compName' value={formData2.compName} onChange={handleInputChange2} maxLength={44} placeholder='Enter Company Name' />
+        </div>
+
+        <div className="input-group">
+           <label htmlFor="position"><span className="label-text">Position</span></label>
+           <input type="text" id='position' name='position' value={formData2.position} onChange={handleInputChange2} maxLength={44} placeholder='Enter Position Title' />
+        </div>
+
+        <div className="ed-dates">
+        <div className="input-group">
+           <label htmlFor="start"><span className="label-text">Start Date</span></label>
+           <input type="date" id='start' name='startDate' value={formData2.startDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
+        </div>
+
+        <div className="input-group">
+           <label htmlFor="end"><span className="label-text">End Date</span></label>
+           <input type="date" id='end' name='endDate' value={formData2.endDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
+        </div>
+        </div>
+
+        <div className="input-group">
+           <label htmlFor="location"><span className="label-text">Lacation</span> <span className='optional'>(optional)</span></label>
+           <input type="text" id='location' name='location' value={formData2.location} onChange={handleInputChange2} maxLength={44} placeholder='City, Country' />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="Description"><span className='label-text'>Description</span>  <span className='optional'>(optional)</span></label>
+          <textarea id="description" value={formData2.description} name='description' onChange={handleInputChange2} placeholder="Enter Description"></textarea> 
+        </div>
+
+        <div className="ed-buttons">
+          
+          <button className='cansel' type='' onClick={(e) => {
+            e.preventDefault();
+            toggleVisibility('expEditForm', event);
+            toggleVisibility('expButton', event);
+            setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
+            }}>Cansel</button>
+            <button  className='confirm'>Confirm</button>
+        </div>
+      </form>
+
+      <button className='add' style={{ display: visibleDivs.expButton ? 'block' : 'none' }} onClick={() => {
+        toggleVisibility('expForm', event);
+        toggleVisibility('expButton', event);
+        }}>Experience +</button>
+        </div>
+      </section>
+
       </div>
       </aside>
     <div className='cv'>
@@ -377,6 +579,26 @@ function App() {
             </div>
 ))}</div>
         </div>
+          <div className="experience-data">
+          <h4 style={{ display: exparr.length > 0 || visibleDivs.expForm  ? 'block' : 'none' }}>Professional Experience</h4>
+          <div className="experience-container">
+            {exparr.map((exp, index) => (
+              <div className="exp-piece" key={index}>
+                <div className='no-des-data'>
+                   <div>
+                <p className='exp-title'>{exp.compName}</p>
+                <p>{exp.position}</p>
+                  </div>
+                  <div>
+                <p>{exp.startDate} – {exp.endDate}</p>
+                <p>{exp.location}</p>
+                </div>
+                </div>
+                <p className='des'>{exp.description}</p>
+              </div>
+            ))}
+          </div>
+          </div>
       </div>
      </div>
     </div>
