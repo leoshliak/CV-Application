@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import Side from './components/Side'
-import Sheet from './components/Sheet'
-
+import EditExperienceForm from './components/EditExperienceForm'
+import ExperienceForm from './components/ExperienceForm'
 
 function App() {
 
@@ -342,12 +341,12 @@ function App() {
 
         <div className="ed-buttons">
           
-          <button className='cansel' type='' onClick={(e) => {
+          <button className='cancel' type='' onClick={(e) => {
             e.preventDefault();
             toggleVisibility('edForm', event);
             toggleVisibility('edButton', event);
             setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
-            }}>Cansel</button>
+            }}>Cancel</button>
             <button  className='save'>Save</button>
         </div>
       </form>
@@ -387,12 +386,12 @@ function App() {
 
         <div className="ed-buttons">
           
-          <button className='cansel' type='' onClick={(e) => {
+          <button className='cancel' type='' onClick={(e) => {
             e.preventDefault();
             toggleVisibility('editForm', event);
             toggleVisibility('edButton', event);
             setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
-            }}>Cansel</button>
+            }}>Cancel</button>
             <button  className='confirm'>Confirm</button>
         </div>
       </form>
@@ -443,105 +442,23 @@ function App() {
          </div>
         ))}
       </div>
-      <form className="exp-form" style={{ display: visibleDivs.expForm ? 'block' : 'none' }} onSubmit={(e) =>{
-        e.preventDefault()
-        handleSubmit2(e)
-        toggleVisibility('expForm', event);
-        toggleVisibility('expButton', event);
-        }}>
-        <div className="input-group">
-           <label htmlFor="company"><span className="label-text">Company Name</span></label>
-           <input type="text" id='company' name='compName' value={formData2.compName} onChange={handleInputChange2} maxLength={44} placeholder='Enter Company Name' />
-        </div>
 
-        <div className="input-group">
-           <label htmlFor="position"><span className="label-text">Position</span></label>
-           <input type="text" id='position' name='position' value={formData2.position} onChange={handleInputChange2} maxLength={44} placeholder='Enter Position Title' />
-        </div>
+       <ExperienceForm
+          formData2={formData2}
+          handleInputChange2={handleInputChange2}
+          handleSubmit2={handleSubmit2}
+          toggleVisibility={toggleVisibility}
+          visibleDivs={visibleDivs}
+        />
 
-        <div className="ed-dates">
-        <div className="input-group">
-           <label htmlFor="start"><span className="label-text">Start Date</span></label>
-           <input type="date" id='start' name='startDate' value={formData2.startDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="end"><span className="label-text">End Date</span></label>
-           <input type="date" id='end' name='endDate' value={formData2.endDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
-        </div>
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="location"><span className="label-text">Lacation</span> <span className='optional'>(optional)</span></label>
-           <input type="text" id='location' name='location' value={formData2.location} onChange={handleInputChange2} maxLength={44} placeholder='City, Country' />
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="Description"><span className='label-text'>Description</span>  <span className='optional'>(optional)</span></label>
-          <textarea id="description" name='description' value={formData2.description} placeholder="Enter Description" onChange={handleInputChange2}></textarea> 
-        </div>
-
-        <div className="ed-buttons">
-          
-          <button className='cansel' type='' onClick={(e) => {
-            e.preventDefault();
-            toggleVisibility('expForm', event);
-            toggleVisibility('expButton', event);
-            setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
-            }}>Cansel</button>
-            <button  className='save'>Save</button>
-        </div>
-      </form>
-
-      <form className="edit-form" style={{ display: visibleDivs.expEditForm ? 'block' : 'none' }} onSubmit={(e) => {
-        e.preventDefault()
-        handleConfirm2(editIndex2, e); 
-        toggleVisibility('expEditForm', event);
-        toggleVisibility('expButton', event);
-        }}>
-        <div className="input-group">
-           <label htmlFor="company"><span className="label-text">Company Name</span></label>
-           <input type="text" id='company' name='compName' value={formData2.compName} onChange={handleInputChange2} maxLength={44} placeholder='Enter Company Name' />
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="position"><span className="label-text">Position</span></label>
-           <input type="text" id='position' name='position' value={formData2.position} onChange={handleInputChange2} maxLength={44} placeholder='Enter Position Title' />
-        </div>
-
-        <div className="ed-dates">
-        <div className="input-group">
-           <label htmlFor="start"><span className="label-text">Start Date</span></label>
-           <input type="date" id='start' name='startDate' value={formData2.startDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="end"><span className="label-text">End Date</span></label>
-           <input type="date" id='end' name='endDate' value={formData2.endDate} onChange={handleInputChange2} maxLength={44} placeholder='' />
-        </div>
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="location"><span className="label-text">Lacation</span> <span className='optional'>(optional)</span></label>
-           <input type="text" id='location' name='location' value={formData2.location} onChange={handleInputChange2} maxLength={44} placeholder='City, Country' />
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="Description"><span className='label-text'>Description</span>  <span className='optional'>(optional)</span></label>
-          <textarea id="description" value={formData2.description} name='description' onChange={handleInputChange2} placeholder="Enter Description"></textarea> 
-        </div>
-
-        <div className="ed-buttons">
-          
-          <button className='cansel' type='' onClick={(e) => {
-            e.preventDefault();
-            toggleVisibility('expEditForm', event);
-            toggleVisibility('expButton', event);
-            setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
-            }}>Cansel</button>
-            <button  className='confirm'>Confirm</button>
-        </div>
-      </form>
+      <EditExperienceForm
+          formData2={formData2}
+          handleInputChange2={handleInputChange2}
+          handleConfirm2={handleConfirm2}
+          toggleVisibility={toggleVisibility}
+          visibleDivs={visibleDivs}
+          editIndex2={editIndex2}
+        />
 
       <button className='add' style={{ display: visibleDivs.expButton ? 'block' : 'none' }} onClick={() => {
         toggleVisibility('expForm', event);
