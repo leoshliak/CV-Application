@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import EditExperienceForm from './components/EditExperienceForm'
 import ExperienceForm from './components/ExperienceForm'
+import EducationForm from './components/EducationForm'
+import EditEducationForm from './components/EditEducationForm'
 
 function App() {
 
@@ -232,6 +234,17 @@ function App() {
     targetSet((prevEd) => prevEd.filter((_, i) => i !== index));
   };
 
+  function cancel(e, form, button, formType) {
+    e.preventDefault();
+    toggleVisibility(form, event);
+    toggleVisibility(button, event);
+    
+    if(formType === 'education') {
+      setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
+    } else {
+      setFormData2({ compName: '', position: '', startDate: '', endDate: '', location: '', description});
+    }
+  }
    
   
   return (
@@ -306,95 +319,26 @@ function App() {
             </div>
           ))}
       </div>
-      <form className="ed-form" style={{ display: visibleDivs.edForm ? 'block' : 'none' }} onSubmit={(e) =>{
-        e.preventDefault()
-        handleSubmit(e);
-        toggleVisibility('edForm', event);
-        toggleVisibility('edButton', event);
-        }}>
-        <div className="input-group">
-           <label htmlFor="shool"><span className="label-text">School</span></label>
-           <input type="text" id='school' name='EI' value={formData.EI} onChange={handleInputChange} maxLength={44} placeholder='Enter school / university' />
-        </div>
+     
 
-        <div className="input-group">
-           <label htmlFor="degree"><span className="label-text">Degree</span></label>
-           <input type="text" id='degree' name='degree' value={formData.degree} onChange={handleInputChange} maxLength={44} placeholder='Enter degree / field of study' />
-        </div>
-
-        <div className="ed-dates">
-        <div className="input-group">
-           <label htmlFor="start"><span className="label-text">Start Date</span></label>
-           <input type="date" id='start' name='startDate' value={formData.startDate} onChange={handleInputChange} maxLength={44} placeholder='' />
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="end"><span className="label-text">End Date</span></label>
-           <input type="date" id='end' name='endDate' value={formData.endDate} onChange={handleInputChange} maxLength={44} placeholder='' />
-        </div>
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="EI-location"><span className="label-text">Lacation</span>  <span className='optional'>(optional)</span></label>
-           <input type="text" id='EI-location' name='location' value={formData.location} onChange={handleInputChange} maxLength={44} placeholder='City, Country' />
-        </div>
-
-        <div className="ed-buttons">
-          
-          <button className='cancel' type='' onClick={(e) => {
-            e.preventDefault();
-            toggleVisibility('edForm', event);
-            toggleVisibility('edButton', event);
-            setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
-            }}>Cancel</button>
-            <button  className='save'>Save</button>
-        </div>
-      </form>
-
-      <form className="edit-form" style={{ display: visibleDivs.editForm ? 'block' : 'none' }} onSubmit={(e) =>{
-        
-        handleConfirm(editIndex, e)
-        toggleVisibility('editForm', event);
-        toggleVisibility('edButton', event);
-        }}>
-        <div className="input-group">
-           <label htmlFor="shool"><span className="label-text">School</span></label>
-           <input type="text" id='school' name='EI' value={formData.EI} onChange={handleInputChange} maxLength={44} placeholder='Enter school / university' />
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="degree"><span className="label-text">Degree</span></label>
-           <input type="text" id='degree' name='degree' value={formData.degree} onChange={handleInputChange} maxLength={44} placeholder='Enter degree / field of study' />
-        </div>
-
-        <div className="ed-dates">
-        <div className="input-group">
-           <label htmlFor="start"><span className="label-text">Start Date</span></label>
-           <input type="date" id='start' name='startDate' value={formData.startDate} onChange={handleInputChange} maxLength={44} placeholder='' />
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="end"><span className="label-text">End Date</span></label>
-           <input type="date" id='end' name='endDate' value={formData.endDate} onChange={handleInputChange} maxLength={44} placeholder='' />
-        </div>
-        </div>
-
-        <div className="input-group">
-           <label htmlFor="EI-location"><span className="label-text">Lacation</span></label>
-           <input type="text" id='EI-location' name='location' value={formData.location} onChange={handleInputChange} maxLength={44} placeholder='City, Country' />
-        </div>
-
-        <div className="ed-buttons">
-          
-          <button className='cancel' type='' onClick={(e) => {
-            e.preventDefault();
-            toggleVisibility('editForm', event);
-            toggleVisibility('edButton', event);
-            setFormData({ EI: '', degree: '', startDate: '', endDate: '', location: ''});
-            }}>Cancel</button>
-            <button  className='confirm'>Confirm</button>
-        </div>
-      </form>
+      <EducationForm 
+       formData={formData}
+       handleInputChange={handleInputChange}
+       handleSubmit={handleSubmit}
+       toggleVisibility={toggleVisibility}
+       visibleDivs={visibleDivs}
+       cancel={cancel}
+      />
+ 
+      <EditEducationForm 
+       formData={formData}
+       handleInputChange={handleInputChange}
+       handleConfirm={handleConfirm}
+       toggleVisibility={toggleVisibility}
+       visibleDivs={visibleDivs}
+       cancel={cancel}
+       editIndex={editIndex}
+      />
 
       <button className='add' style={{ display: visibleDivs.edButton ? 'block' : 'none' }} onClick={() => {
         toggleVisibility('edForm', event);
@@ -449,6 +393,7 @@ function App() {
           handleSubmit2={handleSubmit2}
           toggleVisibility={toggleVisibility}
           visibleDivs={visibleDivs}
+          cancel={cancel}
         />
 
       <EditExperienceForm
@@ -458,6 +403,7 @@ function App() {
           toggleVisibility={toggleVisibility}
           visibleDivs={visibleDivs}
           editIndex2={editIndex2}
+          cancel={cancel}
         />
 
       <button className='add' style={{ display: visibleDivs.expButton ? 'block' : 'none' }} onClick={() => {
