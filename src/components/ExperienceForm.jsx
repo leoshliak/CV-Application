@@ -1,6 +1,6 @@
 import React from "react";
 
- const ExperienceForm = ({ formData2, handleInputChange2, handleSubmit2, toggleVisibility, visibleDivs}) => {
+ const ExperienceForm = ({ formData2, handleInputChange2, handleSubmit2, toggleVisibility, visibleDivs, cancel}) => {
     return (
       <form
       className="exp-form" style={{ display: visibleDivs.expForm ? 'block' : 'none' }} onSubmit={(e) =>{
@@ -92,9 +92,8 @@ import React from "react";
           <button
             className="cancel"
             type="button"
-            onClick={() => {
-              toggleVisibility('expForm', event);
-              toggleVisibility('expButton', event);
+            onClick={(e) => {
+                cancel(e, 'expForm', 'expButton', 'experience')
             }}
           >
             Cancel
