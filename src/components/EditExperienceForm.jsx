@@ -1,6 +1,6 @@
 import React from "react";
 
-  const EditExperienceForm = ({ formData2, handleInputChange2, handleConfirm2, toggleVisibility, visibleDivs, editIndex2 }) => {
+  const EditExperienceForm = ({ formData2, handleInputChange2, handleConfirm2, toggleVisibility, visibleDivs, editIndex2, cancel }) => {
 
 
     return (
@@ -96,9 +96,8 @@ import React from "react";
           <button
             className="cancel"
             type="button"
-            onClick={() => {
-              toggleVisibility('expEditForm', event);
-              toggleVisibility('expButton', event);
+            onClick={(e) => {
+              cancel(e, 'expEditForm', 'expButton', 'experience')
             }}
           >
             Cancel
