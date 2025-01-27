@@ -4,7 +4,8 @@ import EditExperienceForm from './components/EditExperienceForm'
 import ExperienceForm from './components/ExperienceForm'
 import EducationForm from './components/EducationForm'
 import EditEducationForm from './components/EditEducationForm'
-
+import PersDetailsForm from './components/PersDetailsForm'
+import Sheet from './components/Sheet'
 function App() {
 
   const [name, setName] = useState('James Milner')
@@ -258,27 +259,14 @@ function App() {
       <button className='example' onClick={loadExample}>Load Example</button>
       </div>
       <div className="side-content">
-      <form className="personal-details">
-       <div className='title-con'><h2>Personal Details</h2>  <span onClick={() => toggleVisibility('div1', event)}>▲</span></div>
-          <div style={{ display: visibleDivs.div1 ? 'block' : 'none' }} className="form-con">
-        <div className="input-group">
-          <label htmlFor="full-name"><span className="label-text">Full name</span></label>
-          <input type="text" id="full-name" placeholder="First and last name" maxLength={44} value={name} onChange={(e) => {setName(e.target.value)}} />
-          </div>
-          <div className="input-group">
-            <label htmlFor="email"><span className="label-text">Email</span></label>
-            <input type="email" id="email" placeholder="Enter email" maxLength={44} value={email} onChange={(e) => {setEmail(e.target.value)}} />
-            </div>
-            <div className="input-group">
-              <label htmlFor="phone-number"><span className="label-text">Phone number</span></label>
-              <input type="tel" id="phone-number" placeholder="Enter phone number" maxLength={44} value={phone} onChange={(e) => {setPhone(e.target.value)}} />
-              </div>
-              <div className="input-group">
-                <label htmlFor="address"><span className="label-text">Address</span></label>
-                <input type="text" id="address" placeholder="City, Country" maxLength={44} value={adress} onChange={(e) => {setAdress(e.target.value)}} />
-                </div>
-                </div>
-      </form>
+      <PersDetailsForm 
+        toggleVisibility={toggleVisibility}
+        visibleDivs={visibleDivs}
+        Name={[name, setName]}
+        Email={[email, setEmail]}
+        Phone={[phone, setPhone]}
+        Adress={[adress, setAdress]}
+      />
  
       <section className="education">
       <div className='title-ed'><h2>Education</h2>  <span className='turn' onClick={() => toggleVisibility('div2', event)}>▲</span></div>
@@ -416,54 +404,15 @@ function App() {
       </div>
       </aside>
     <div className='cv'>
-    <div className="paper-sheet">
-      <div className="personal-info">
-         <h3>{name}</h3>
-         <div className="personal-data">
-            <p>{email}</p>
-            <p>{phone}</p>
-            <p>{adress}</p>
-         </div>
-      </div>
-      <div className="rest">
-        <div className="education-data">
-            <h4 style={{ display: edarr.length > 0 || visibleDivs.edForm  ? 'block' : 'none' }}>Education</h4>
-            <div className="educations-container">
-            {edarr.map((educ, index) => (
-            <div className="ed-piece" key={index}>
-              <div>
-              <p className="ed-title">{educ.EI}</p>
-              <p className='degree'>{educ.degree}</p>
-              </div>
-              <div>
-              <p>{educ.startDate} – {educ.endDate}</p>
-              <p>{educ.location}</p>
-              </div>
-            </div>
-))}</div>
-        </div>
-          <div className="experience-data">
-          <h4 style={{ display: exparr.length > 0 || visibleDivs.expForm  ? 'block' : 'none' }}>Professional Experience</h4>
-          <div className="experience-container">
-            {exparr.map((exp, index) => (
-              <div className="exp-piece" key={index}>
-                <div className='no-des-data'>
-                   <div>
-                <p className='exp-title'>{exp.compName}</p>
-                <p>{exp.position}</p>
-                  </div>
-                  <div>
-                <p>{exp.startDate} – {exp.endDate}</p>
-                <p>{exp.location}</p>
-                </div>
-                </div>
-                <p className='des'>{exp.description}</p>
-              </div>
-            ))}
-          </div>
-          </div>
-      </div>
-     </div>
+    <Sheet 
+      name={name}
+      email={email}
+      phone={phone}
+      adress={adress}
+      visibleDivs={visibleDivs}
+      edarr={edarr}
+      exparr={exparr}
+    />
     </div>
     </>
   )
