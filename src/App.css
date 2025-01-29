@@ -114,9 +114,9 @@ aside {
 }
 
 .label-text {
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
     color: #092f46;
     margin-left: 3px;
 }
@@ -127,7 +127,7 @@ aside {
     border-radius: 7px;
     padding: 8px;
     transition: border .25s,box-shadow .25s;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     letter-spacing: 0.2px;
 }
 
@@ -189,7 +189,7 @@ aside {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    align-items: center;
+   /* align-items: center;*/
 }
 
 .title-con span,
@@ -234,7 +234,7 @@ aside {
     margin-top: 18px;
   margin-bottom: 5px;
   padding: 8px 18px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.3px;
@@ -270,7 +270,7 @@ aside {
   }
 
   .ed-dates .input-group .label-text {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .ed-buttons {
@@ -282,7 +282,7 @@ aside {
   .ed-buttons button {
     width: 4rem;
     height: 1.7rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     letter-spacing: 0.6px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -324,7 +324,7 @@ aside {
   .education-data h4,
   .experience-data h4 {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     letter-spacing: 0.4px;
     color: #000;
     border-bottom: 2px solid #000;
@@ -336,7 +336,7 @@ aside {
     padding-top: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
   }
   
   .card {
@@ -345,14 +345,14 @@ aside {
     justify-content: space-between;
     min-height: 40px;
     border: 2px solid silver;
-    padding: 5px 14px;
+    padding: 10px 15px;
     height: auto;
   }
 
   .card p {
     color: #092f46;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 650;
     letter-spacing: 0.4px;
     max-width: 65%;
     flex-wrap: wrap;
@@ -390,8 +390,8 @@ aside {
 
   .ed-title,
   .exp-title {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
   }
 
   .ed-piece {
@@ -401,7 +401,8 @@ aside {
 
   .ed-piece p{
     letter-spacing: 0.2px;
-    line-break: anywhere;
+    overflow: auto;
+    max-width: 110%;
   }
 
   .ed-piece div,
@@ -424,7 +425,7 @@ aside {
   }
 
   .degree {
-    font-size: 0.97rem;
+    font-size: 1rem;
   }
 
   .optional {
@@ -446,7 +447,7 @@ aside {
 
   .exp-piece p {
     letter-spacing: 0.2px;
-    line-break: anywhere;
-    max-width: 750px;
+    overflow: auto;
+    max-width: 110%;
 }
 

@@ -15,7 +15,7 @@ import React from "react";
         }}
       >
         <div className="input-group">
-          <label htmlFor="company">Company Name</label>
+          <label htmlFor="company" className="label-text">Company Name</label>
           <input
             type="text"
             id="company"
@@ -28,7 +28,7 @@ import React from "react";
         </div>
   
         <div className="input-group">
-          <label htmlFor="position">Position</label>
+          <label htmlFor="position" className="label-text">Position</label>
           <input
             type="text"
             id="position"
@@ -42,7 +42,7 @@ import React from "react";
   
         <div className="ed-dates">
           <div className="input-group">
-            <label htmlFor="start">Start Date</label>
+            <label htmlFor="start" className="label-text">Start Date</label>
             <input
               type="date"
               id="start"
@@ -53,7 +53,7 @@ import React from "react";
           </div>
   
           <div className="input-group">
-            <label htmlFor="end">End Date</label>
+            <label htmlFor="end" className="label-text">End Date</label>
             <input
               type="date"
               id="end"
@@ -65,7 +65,7 @@ import React from "react";
         </div>
   
         <div className="input-group">
-          <label htmlFor="location">
+          <label htmlFor="location" className="label-text">
             Location <span className="optional">(optional)</span>
           </label>
           <input
@@ -80,7 +80,7 @@ import React from "react";
         </div>
   
         <div className="input-group">
-          <label htmlFor="description">
+          <label htmlFor="description" className="label-text">
             Description <span className="optional">(optional)</span>
           </label>
           <textarea

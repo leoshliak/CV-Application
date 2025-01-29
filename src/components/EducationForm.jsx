@@ -33,7 +33,7 @@ const EducationForm = ({ formData, handleInputChange, handleSubmit, toggleVisibi
             </div>
     
             <div className="input-group">
-               <label htmlFor="EI-location"><span className="label-text">Lacation</span>  <span className='optional'>(optional)</span></label>
+               <label htmlFor="EI-location"><span className="label-text">Location</span>  <span className='optional'>(optional)</span></label>
                <input type="text" id='EI-location' name='location' value={formData.location} onChange={handleInputChange} maxLength={44} placeholder='City, Country' />
             </div>
     
