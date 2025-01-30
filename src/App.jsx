@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useEffect, useRef } from 'react';
+import './styles/App.css'
+import './styles/adaptive.css'
 import EditExperienceForm from './components/EditExperienceForm'
 import ExperienceForm from './components/ExperienceForm'
 import EducationForm from './components/EducationForm'
@@ -12,6 +13,28 @@ function App() {
   const [email, setEmail] = useState('example@gmail.com') 
   const [phone, setPhone] = useState('+38 094 343 1122')
   const [adress, setAdress] = useState('UK, Liverpool')
+
+  const mainRef = useRef(null);
+  const asideRef = useRef(null);
+  const [mainHeight, setMainHeight] = useState(0);
+
+  useEffect(() => {
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        setMainHeight(entry.contentRect.height);
+      }
+    });
+
+    if (mainRef.current) {
+      observer.observe(mainRef.current);
+    }
+
+    return () => {
+      if (mainRef.current) {
+        observer.unobserve(mainRef.current);
+      }
+    };
+  }, []);
 
   function clearAll() {
     setName('')
@@ -44,9 +67,11 @@ function App() {
       location: 'London, UK',
       description: 'As a Software Engineer at TechNova Solutions, the individual will be responsible for designing, developing, and maintaining software applications that cater to a variety of industries, from finance to healthcare. They will work collaboratively with cross-functional teams to understand user needs and translate them into high-quality software solutions. The role involves writing clean, efficient code, debugging, and performing unit testing to ensure functionality. Additionally, the engineer will be involved in the integration of third-party APIs, ensuring the scalability and security of the applications. With a strong foundation in Computer Science, the individual will also contribute to the continuous improvement of the software development lifecycle and mentor junior team members.',
     }])
+
   }
   
   const [visibleDivs, setVisibleDivs] = useState({
+    aside: true,
     div1: true,
     div2: false,
     div3: false,
@@ -148,6 +173,7 @@ function App() {
       } else {
         alert('Please fill out all fields.');
       }
+
     }
 
     function handleSubmit2(e) {
@@ -175,6 +201,7 @@ function App() {
       } else {
         alert('Please fill out all fields.');
       }
+
     }
 
    function handleConfirm(index, e) {
@@ -233,6 +260,7 @@ function App() {
 
   function handleDelete(index, targetSet) {
     targetSet((prevEd) => prevEd.filter((_, i) => i !== index));
+
   };
 
   function cancel(e, form, button, formType) {
@@ -246,14 +274,20 @@ function App() {
       setFormData2({ compName: '', position: '', startDate: '', endDate: '', location: '', description});
     }
   }
-   
   
+   
   return (
     <>
-    <aside>
+    <header>
+      <div className="forms-icon active" onClick={() =>{
+        const formsIcon =document.querySelector('.forms-icon')
+       formsIcon.classList.toggle("active");
+        toggleVisibility('aside', event)
+      }}><span></span></div>
       <div className='logo'>
       <h1>CV Builder</h1>
       </div>
+    </header><aside  ref={asideRef} className={visibleDivs.aside ? '' : 'hide'} style={{height: `${mainHeight}px`,}}>
       <div className='side-buttons'>
       <button className='clear' onClick={clearAll}>Clear Resume</button>
       <button className='example' onClick={loadExample}>Load Example</button>
@@ -403,7 +437,9 @@ function App() {
 
       </div>
       </aside>
-    <div className='cv'>
+      <main  ref={mainRef}>
+    
+    <div className='cv' style={{transform: visibleDivs.aside ? 'translateX(15%)' : 'translateX(0px)'}}>
     <Sheet 
       name={name}
       email={email}
@@ -414,6 +450,7 @@ function App() {
       exparr={exparr}
     />
     </div>
+    </main>
     </>
   )
 }

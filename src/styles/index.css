@@ -47,6 +47,15 @@ h1 {
   font-style: normal;
 }
 
-#root {
+
+main {
   display: flex;
+ justify-content: center;
+  width: 100%
+ }
+
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }

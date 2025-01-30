@@ -1,6 +1,6 @@
 import React from "react";
 
-const Sheet = ({name ,email, phone, adress, visibleDivs, edarr, exparr}) => {
+const Sheet = ({name ,email, phone, adress, visibleDivs, edarr, exparr,}) => {
     return (
         <div className="paper-sheet">
       <div className="personal-info">
