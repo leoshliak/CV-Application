@@ -15,26 +15,38 @@ function App() {
   const [adress, setAdress] = useState('UK, Liverpool')
 
   const mainRef = useRef(null);
-  const asideRef = useRef(null);
-  const [mainHeight, setMainHeight] = useState(0);
+  const asideInnerRef = useRef(null);
+  const [asideHeight, setAsideHeight] = useState(0);
+
+  const useElementHeight = (ref) => {
+    const [height, setHeight] = useState(0);
+    
+    useEffect(() => {
+      const observer = new ResizeObserver(entries => {
+        setHeight(entries[0].contentRect.height);
+      });
+
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [ref]);
+
+    return height;
+  };
+
+  const mainHeight = useElementHeight(mainRef);
+  const asideInnerHeight = useElementHeight(asideInnerRef);
+
 
   useEffect(() => {
-    const observer = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        setMainHeight(entry.contentRect.height);
-      }
-    });
-
-    if (mainRef.current) {
-      observer.observe(mainRef.current);
-    }
-
-    return () => {
-      if (mainRef.current) {
-        observer.unobserve(mainRef.current);
-      }
-    };
-  }, []);
+    setAsideHeight(Math.max(mainHeight, asideInnerHeight));
+  }, [mainHeight, asideInnerHeight]);
 
   function clearAll() {
     setName('')
@@ -87,6 +99,7 @@ function App() {
     if(event.target.innerHTML === '▲') {
       event.target.classList.toggle('turn');
     }
+
     setVisibleDivs((prev) => ({
       ...prev,
       [divKey]: !prev[divKey],
@@ -287,12 +300,15 @@ function App() {
       <div className='logo'>
       <h1>CV Builder</h1>
       </div>
-    </header><aside  ref={asideRef} className={visibleDivs.aside ? '' : 'hide'} style={{height: `${mainHeight}px`,}}>
-      <div className='side-buttons'>
+    </header>
+    <aside  className={visibleDivs.aside ? '' : 'hide'} style={{height: `${asideHeight}px`,}}>
+      <div ref={asideInnerRef} style={{width: "100%"}}>
+      <div className="side-content">
+        <div className='side-buttons'>
       <button className='clear' onClick={clearAll}>Clear Resume</button>
       <button className='example' onClick={loadExample}>Load Example</button>
       </div>
-      <div className="side-content">
+      
       <PersDetailsForm 
         toggleVisibility={toggleVisibility}
         visibleDivs={visibleDivs}
@@ -436,8 +452,9 @@ function App() {
       </section>
 
       </div>
+      </div>
       </aside>
-      <main  ref={mainRef}>
+      <main    ref={mainRef}>
     
     <div className={visibleDivs.aside ? 'cv move' : 'cv'} >
     <Sheet 
