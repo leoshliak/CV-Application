@@ -22,7 +22,7 @@ const Sheet = ({name ,email, phone, adress, visibleDivs, edarr, exparr,}) => {
               <p className='degree'>{educ.degree}</p>
               </div>
               <div>
-              <p>{educ.startDate} – {educ.endDate}</p>
+              <p className="dates">{educ.startDate} – {educ.endDate}</p>
               <p>{educ.location}</p>
               </div>
             </div>
@@ -39,7 +39,7 @@ const Sheet = ({name ,email, phone, adress, visibleDivs, edarr, exparr,}) => {
                 <p>{exp.position}</p>
                   </div>
                   <div>
-                <p>{exp.startDate} – {exp.endDate}</p>
+                <p className="dates">{exp.startDate} – {exp.endDate}</p>
                 <p>{exp.location}</p>
                 </div>
                 </div>

@@ -49,13 +49,16 @@ h1 {
 
 
 main {
-  display: flex;
- justify-content: center;
-  width: 100%
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
  }
 
 header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  z-index: 999;
 }

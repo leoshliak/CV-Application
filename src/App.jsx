@@ -303,7 +303,7 @@ function App() {
       />
  
       <section className="education">
-      <div className='title-ed'><h2>Education</h2>  <span className='turn' onClick={() => toggleVisibility('div2', event)}>▲</span></div>
+      <div className='title-ed'><h2>Education</h2>  <span className='s turn' onClick={() => toggleVisibility('div2', event)}>▲</span></div>
       <div style={{ display: visibleDivs.div2 ? 'flex' : 'none' }} className="education-con">
       <div className="degrees" style={{display: visibleDivs.edButton ? 'flex' : 'none'}}>
           {edarr.map((label, index) => (
@@ -439,7 +439,7 @@ function App() {
       </aside>
       <main  ref={mainRef}>
     
-    <div className='cv' style={{transform: visibleDivs.aside ? 'translateX(15%)' : 'translateX(0px)'}}>
+    <div className={visibleDivs.aside ? 'cv move' : 'cv'} >
     <Sheet 
       name={name}
       email={email}
