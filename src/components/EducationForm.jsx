@@ -2,7 +2,7 @@ import React from "react";
 
 const EducationForm = ({ formData, handleInputChange, handleSubmit, toggleVisibility, visibleDivs, cancel}) => {
     return (
-        <form className="ed-form" style={{ display: visibleDivs.edForm ? 'block' : 'none' }} onSubmit={(e) =>{
+        <form className={visibleDivs.edForm ? 'ed-form visible' : 'ed-form hidden'} onSubmit={(e) =>{
             e.preventDefault()
             handleSubmit(e);
             toggleVisibility('edForm', event);

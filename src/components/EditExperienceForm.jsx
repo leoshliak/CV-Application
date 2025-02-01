@@ -5,8 +5,7 @@ import React from "react";
 
     return (
       <form
-        className="edit-form"
-        style={{ display: visibleDivs.expEditForm ? 'block' : 'none' }}
+      className={visibleDivs.expEditForm ? 'edit-form visible' : 'edit-form hidden'}
         onSubmit={(e) => {
           e.preventDefault()
         handleConfirm2(editIndex2, e); 

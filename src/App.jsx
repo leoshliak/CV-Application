@@ -318,10 +318,10 @@ function App() {
         Adress={[adress, setAdress]}
       />
  
-      <section className="education">
+      <section  className={visibleDivs.div2 ? 'education visible' : 'education hidden'}>
       <div className='title-ed'><h2>Education</h2>  <span className='s turn' onClick={() => toggleVisibility('div2', event)}>▲</span></div>
-      <div style={{ display: visibleDivs.div2 ? 'flex' : 'none' }} className="education-con">
-      <div className="degrees" style={{display: visibleDivs.edButton ? 'flex' : 'none'}}>
+      <div className='education-con'>
+      <div className={visibleDivs.edButton ? 'degrees visible' : 'degrees hidden'}>
           {edarr.map((label, index) => (
             <div className='card' key={index}>
               <p>{label.EI}</p>
@@ -385,10 +385,10 @@ function App() {
       </div>
       </section>
 
-      <section className='experience'>
+      <section className={visibleDivs.div3 ? 'experience visible' : 'experience hidden'}>
       <div className='title-exp'><h2>Experience</h2>  <span className='turn' onClick={() => toggleVisibility('div3', event)}>▲</span></div>
-      <div style={{ display: visibleDivs.div3 ? 'flex' : 'none' }} className="education-con">
-      <div className="experiences" style={{display: visibleDivs.expButton ? 'flex' : 'none'}}>
+      <div className='experience-con'>
+      <div className={visibleDivs.expButton ? 'experiences visible' : 'experiences hidden'}>
       {exparr.map((label, index) => (
          <div className="card" key={index}>
           <p>{label.compName}</p>

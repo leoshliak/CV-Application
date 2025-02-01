@@ -6,14 +6,13 @@ const PersDetailsForm = ({
    Phone,  Adress,
 }) => {
    return (
-      <form className="personal-details">
+      <form  className={visibleDivs.div1 ? 'personal-details visible' : 'personal-details hidden'}>
          <div className="title-con">
             <h2>Personal Details</h2>{" "}
             <span onClick={() => toggleVisibility("div1", event)}>▲</span>
          </div>
          <div
-            style={{ display: visibleDivs.div1 ? "block" : "none" }}
-            className="form-con"
+            className='form-con'
          >
             <div className="input-group">
                <label htmlFor="full-name">

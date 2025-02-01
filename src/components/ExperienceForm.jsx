@@ -3,7 +3,7 @@ import React from "react";
  const ExperienceForm = ({ formData2, handleInputChange2, handleSubmit2, toggleVisibility, visibleDivs, cancel}) => {
     return (
       <form
-      className="exp-form" style={{ display: visibleDivs.expForm ? 'block' : 'none' }} onSubmit={(e) =>{
+      className={visibleDivs.expForm ? 'exp-form visible' : 'exp-form hidden'} onSubmit={(e) =>{
         e.preventDefault()
         handleSubmit2(e)
         toggleVisibility('expForm', event);

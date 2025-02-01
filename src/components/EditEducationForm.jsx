@@ -2,7 +2,7 @@ import React from "react";
 
 const EditEducationForm = ({ formData, handleInputChange, handleConfirm, toggleVisibility, visibleDivs, cancel, editIndex}) => {
   return (
-    <form className="edit-form" style={{ display: visibleDivs.editForm ? 'block' : 'none' }} onSubmit={(e) =>{
+    <form className={visibleDivs.editForm ? 'edit-form visible' : 'edit-form hidden'} onSubmit={(e) =>{
         
         handleConfirm(editIndex, e)
         toggleVisibility('editForm', event);
