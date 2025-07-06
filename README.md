@@ -1,5 +1,7 @@
 # 📄 CV Builder
 
+A simple and clean CV Builder application built with React, JavaScript, HTML, and CSS. Fill out your personal details, education, and work experience — and see your CV update in real time!
+
 ## 📝 About
 This project was built as part of The Odin Project curriculum. It helped me learn how to manage form state, dynamically update the UI, and build reusable components with React.
 
