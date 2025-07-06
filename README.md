@@ -1,4 +1,29 @@
-The CV-Application project  is created according to the assignment from The Odin Project course.
+# 📄 CV Builder
+
+## 📝 About
+This project was built as part of The Odin Project curriculum. It helped me learn how to manage form state, dynamically update the UI, and build reusable components with React.
+
+## ⚙️ Features
+✏️ Fill out your personal details, education, and work experience
+
+🔄 Live preview of your CV layout
+
+📄 Example CV loader & clear/reset functionality
+
+🎨 Clean, responsive design
+
+## 🧩 Tech Stack
+
+**React**
+
+**JavaScript (ES6+)**
+
+**HTML5**
+
+**CSS3**
+
+
+## 📸 Preview
 
 ![image](https://github.com/user-attachments/assets/aa16f233-8e8b-4546-8660-0820e858aa38)
 
